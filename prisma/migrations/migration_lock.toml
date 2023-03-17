@@ -1,0 +1,25 @@
+[package]
+name = "my-project"
+version = "1.0.0"
+
+[dependencies]
+sqlx = { version = "0.5", features = ["postgres"], optional = true }
+actix-web = { version = "3.2" }
+
+[[migrations]]
+version = "20220106143947"
+up = [
+    "# SQL migration script goes here",
+    "#",
+    "# You can use multiline SQL statements"
+]
+down = []
+
+[[migrations]]
+version = "20220107145554"
+up = [
+    "# Another SQL migration script goes here"
+]
+down = [
+    "# SQL script to rollback this migration"
+]
