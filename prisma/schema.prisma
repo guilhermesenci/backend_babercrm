@@ -1,16 +1,31 @@
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
   provider = "prisma-client-js"
 }
 
-model User {
+datasource db {
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+// arquivo: schema.prisma
+
+model Usuario {
+  id     Int     @id @default(autoincrement())
+  nome   String
+  email  String  @unique
+  senha  String
+  perfil Perfil? // relacionamento com o modelo 'Perfil'
+}
+
+model Perfil {
   id        Int      @id @default(autoincrement())
-  name      String
-  email     String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  nome      String
+  idade     Int?
+  telefone  String?
+  usuarioId Int?     @unique // relacionamento com o modelo 'Usuario' 
+  usuario   Usuario? @relation(fields: [usuarioId], references: [id]) // chave estrangeira do relacionamento
 }
