@@ -14,5 +14,5 @@ route.get("/", (req, res) => {
 app.use(route);
 
 app.listen(PORT, () => {
-  console.log("Rodando na porta" + PORT);
+  console.log("Rodando na porta " + PORT);
 });
